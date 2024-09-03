@@ -50,3 +50,51 @@ button {
     margin-top: 20px;
 }
 script.js
+/*let currentNumber = Math.floor(Math.random() * 6) + 1;
+let score = 0;
+document.getElementById('rollButton').addEventListener('click', rollDice);
+
+function rollDice() {
+    const nextNumber = Math.floor(Math.random() * 6) + 1;
+    const message = document.getElementById('message');
+    const result = document.getElementById('result');
+    
+    if (nextNumber > currentNumber) {
+        message.textContent = '¡Más alto!';
+    } else if (nextNumber < currentNumber) {
+        message.textContent = '¡Más bajo!';
+    } else {
+        message.textContent = '¡Igual!';
+    }
+    
+    result.textContent = `El número era ${nextNumber}.`;
+    currentNumber = nextNumber;
+}*/
+
+let currentNumber = Math.floor(Math.random() * 6) + 1;
+let score = 0;
+
+document.getElementById('lower').addEventListener('click', () => guess('lower'));
+document.getElementById('equal').addEventListener('click', () => guess('equal'));
+document.getElementById('higher').addEventListener('click', () => guess('higher'));
+
+function guess(direction) {
+    const nextNumber = Math.floor(Math.random() * 6) + 1;
+    const message = document.getElementById('message');
+    const result = document.getElementById('result');
+    
+    if ((direction === 'lower' && nextNumber < currentNumber) ||
+        (direction === 'equal' && nextNumber === currentNumber) ||
+        (direction === 'higher' && nextNumber > currentNumber)) {
+        score++;
+        message.textContent = `¡Correcto! El número era ${nextNumber}.`;
+    } else {
+        score--;
+        message.textContent = `Incorrecto. El número era ${nextNumber}.`;
+    }
+    
+    currentNumber = nextNumber;
+    result.textContent = `El número actual es ${currentNumber}.`;
+    document.getElementById('score').textContent = `Puntuación: ${score}`;
+}
+
